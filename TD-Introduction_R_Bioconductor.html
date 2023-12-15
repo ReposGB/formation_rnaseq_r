@@ -1733,8 +1733,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1]  0.37489147  0.09231312  1.66705014  0.16362889  0.44250245  1.24182225
-##  [7] -0.00453597 -1.55857260 -2.47511600  0.86457112</code></pre>
+<pre><code>##  [1]  0.2621969  0.9500949 -1.0007324 -0.9002123 -0.2514610 -1.5491619
+##  [7]  2.0465505 -1.2201593  1.4849577  1.4659857</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1822,7 +1822,10 @@ chromosomique, strand et le type de <em>feature</em>.</p></li>
 human.gene.annot[12,]
 
 # 2
-human.gene.annot[100:105,]
+human.gene.annot[100:105, c(&quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;genomic strand&quot;)]
+# ou
+human.gene.annot[100:105, colnames(human.gene.annot) %in% c(&quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;genomic strand&quot;)]
+
 
 # 3
 unique(human.gene.annot[,3])</code></pre>
