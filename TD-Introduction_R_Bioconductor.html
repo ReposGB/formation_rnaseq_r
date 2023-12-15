@@ -1733,8 +1733,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1] -0.9411012 -1.6183191  0.6864288 -0.6417656  0.5896860  0.9575452
-##  [7] -0.7509981 -1.1498151 -2.2650468 -2.1379775</code></pre>
+<pre><code>##  [1]  0.77554751 -0.30686257 -0.77756875 -2.23777279  0.50623740  1.27697414
+##  [7] -0.97510432 -0.98666611 -0.17702926 -0.03672658</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1795,7 +1795,7 @@ l’objet avec la fonction View, disponible dans RStudio.</p></li>
 <h3><span class="header-section-number">4.1.1</span> Solution</h3>
 <pre class="r"><code>human.gene.annot &lt;- read.delim(&quot;gencode.v38.ENSEMBL.annotation.gtf&quot;, comment.char=&quot;#&quot;)
 
-names(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
+colnames(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
 # 2
 dim(human.gene.annot)
 
