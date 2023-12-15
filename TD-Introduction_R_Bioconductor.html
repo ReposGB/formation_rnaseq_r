@@ -1733,8 +1733,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1] -0.6867955 -0.3791399 -0.6301306 -1.2577048  0.6286225  0.7972093
-##  [7]  2.1004764  0.7150810 -0.7102841  0.1605710</code></pre>
+<pre><code>##  [1] -0.9411012 -1.6183191  0.6864288 -0.6417656  0.5896860  0.9575452
+##  [7] -0.7509981 -1.1498151 -2.2650468 -2.1379775</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1791,6 +1791,19 @@ GFF et donc partagent le même format.</p>
 <li><p>Afficher les premières lignes, les dernières lignes, puis ouvrez
 l’objet avec la fonction View, disponible dans RStudio.</p></li>
 </ol>
+<div id="solution-5" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Solution</h3>
+<pre class="r"><code>human.gene.annot &lt;- read.delim(&quot;gencode.v38.ENSEMBL.annotation.gtf&quot;, comment.char=&quot;#&quot;)
+
+names(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
+# 2
+dim(human.gene.annot)
+
+# 3
+head(human.gene.annot)
+tail(human.gene.annot)
+View(human.gene.annot)</code></pre>
+</div>
 </div>
 <div id="sélection-dun-sous-ensemble-de-données" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Sélection d’un sous
