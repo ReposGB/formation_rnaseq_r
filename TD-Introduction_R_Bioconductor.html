@@ -1733,8 +1733,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1]  0.77554751 -0.30686257 -0.77756875 -2.23777279  0.50623740  1.27697414
-##  [7] -0.97510432 -0.98666611 -0.17702926 -0.03672658</code></pre>
+<pre><code>##  [1]  1.4766536  0.6258429 -0.7040370  0.6615737 -1.5012991  1.6344921
+##  [7]  0.1642141 -0.3971595 -1.2739104 -0.3611014</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1815,6 +1815,17 @@ ensemble de données</h2>
 chromosomique, strand et le type de <em>feature</em>.</p></li>
 <li><p>Afficher les types de <em>features</em> existantes.</p></li>
 </ol>
+<div id="solution-6" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Solution</h3>
+<pre class="r"><code># 1
+human.gene.annot[12,]
+
+# 2
+human.gene.annot[100:105,]
+
+# 3
+unique(human.gene.annot[,3])</code></pre>
+</div>
 </div>
 <div id="sélection-dun-sous-ensemble-de-données-basé-sur-les-valeurs-du-tableau" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Sélection d’un sous
