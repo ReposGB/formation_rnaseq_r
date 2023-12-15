@@ -1538,6 +1538,16 @@ simples</h2>
 0.3.10^4\)</span></p></li>
 <li><p>Concaténer les chaines de caractère “J’aime” et “Linux”</p></li>
 </ol>
+<div id="solution" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Solution</h3>
+<pre class="r"><code># Exercice 1 - Calculs simples
+2+2</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>0.5e4 * 0.3e4</code></pre>
+<pre><code>## [1] 1.5e+07</code></pre>
+<pre class="r"><code>paste(&quot;J&#39;aime&quot;, &quot;Linux&quot;)</code></pre>
+<pre><code>## [1] &quot;J&#39;aime Linux&quot;</code></pre>
+</div>
 </div>
 <div id="exercice-variables-et-environnemnt" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Exercice: Variables
@@ -1548,6 +1558,15 @@ variables, respectivement <code>a1</code>, <code>a2</code>et
 <code>str_linux</code>.</p></li>
 <li><p>Où retrouver ces objets avec l’interface RStudio ?</p></li>
 </ol>
+<div id="solution-1" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Solution</h3>
+<pre class="r"><code># Exercice 2 - variables et environnement
+
+a1 &lt;- 2+2
+a2 &lt;- 0.5e4 * 0.3e4
+str_linux &lt;- paste(&quot;J&#39;aime&quot;, &quot;Linux&quot;)
+# On peut voir les objets dans la fenêtre &quot;environment&quot; sous RStudio</code></pre>
+</div>
 </div>
 <div id="exercice-extraction-déléments-dun-vecteur" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Exercice: Extraction
@@ -1567,6 +1586,30 @@ et “EGFR”.</p></li>
 <li><p>Ajouter les gènes “PIK3CA” et “KIT” au vecteur
 <code>gl2</code></p></li>
 </ol>
+<div id="solution-2" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Solution</h3>
+<pre class="r"><code># Exercice 3 - Extraction d&#39;éléments
+# ----------------------------------
+gl &lt;- c(&quot;ALK&quot;, &quot;HRAS&quot;, &quot;BRAD&quot;, &quot;AKT1&quot;, &quot;EGFR&quot;)
+
+# 1 
+length(gl)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code># 2
+gl[1:3]</code></pre>
+<pre><code>## [1] &quot;ALK&quot;  &quot;HRAS&quot; &quot;BRAD&quot;</code></pre>
+<pre class="r"><code># 3
+gl2 &lt;- c(gl[2], gl[5])
+
+# ou
+gl2 &lt;- gl[c(2,5)]
+
+# 4
+sort(gl)</code></pre>
+<pre><code>## [1] &quot;AKT1&quot; &quot;ALK&quot;  &quot;BRAD&quot; &quot;EGFR&quot; &quot;HRAS&quot;</code></pre>
+<pre class="r"><code># 5 
+gl2 &lt;- c(gl2, &quot;PIK3CA&quot;, &quot;KIT&quot;)</code></pre>
+</div>
 </div>
 <div id="exercice-facteurs" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Exercice:
@@ -1726,9 +1769,6 @@ gènes pour le génome total (<code>feature == &quot;gene&quot;</code>)</p>
 <li><p>DataSheet <strong>RStudio:</strong>: <a href="https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf</a></p></li>
 <li><p>DataSheet <strong>“tout”</strong>: <a href="https://github.com/rstudio/cheatsheets/tree/main" class="uri">https://github.com/rstudio/cheatsheets/tree/main</a></p></li>
 </ul>
-</div>
-<div id="solution" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Solution</h1>
 <p><br> <br> <br> <br></p>
 <hr />
 <div style="text-align: center">
