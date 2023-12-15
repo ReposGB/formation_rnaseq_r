@@ -1666,6 +1666,29 @@ champs de <code>chrs</code> séparés par un espace ” “. Indice :
 <code>chrsj</code>. Indice : <code>strsplit</code>. Vérifier s’il est
 identique à <code>chrs</code>.</p></li>
 </ol>
+<pre class="r"><code>### Solution
+
+# Exercice: Chaines de caractères
+# ---------------------------------
+
+# 1
+
+paste(&quot;chr&quot;, 1, sep=&quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;chr1&quot;</code></pre>
+<pre class="r"><code># 2
+
+chrs &lt;- paste(&quot;chr&quot;, c(seq(1, 22), &quot;X&quot;, &quot;Y&quot;), sep=&quot;&quot;)
+
+# 3
+
+chrsj &lt;- paste(chrs, collapse = &#39; &#39;)
+
+# 4
+
+chrs2 &lt;- unlist(strsplit(chrsj, &quot; &quot;))
+
+identical(chrs2, chrs)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="exercice-tableaux-de-données" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Exercice: Tableaux de
@@ -1696,6 +1719,44 @@ de 1 à 26.</p></li>
 <li><p>Essayer de transformer de nouveau <code>x</code> en data.frame.
 Que se passe-t-il ?</p></li>
 </ol>
+<div id="solution-4" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Solution</h3>
+<pre class="r"><code># Exercice: Tableau de données
+# ----------------------------
+
+# 1
+
+a &lt;- rnorm(10, mean = 0, sd = 1)
+
+b &lt;- rep(1, 10)
+
+x &lt;- list(a=a, b=b)
+
+x$a</code></pre>
+<pre><code>##  [1] -0.6867955 -0.3791399 -0.6301306 -1.2577048  0.6286225  0.7972093
+##  [7]  2.1004764  0.7150810 -0.7102841  0.1605710</code></pre>
+<pre class="r"><code># 2
+
+y &lt;- data.frame(x)
+
+# 3
+
+z1 &lt;- y[1:3,]
+z2 &lt;- y[8:10,]
+
+class(z1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(z2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># 4
+
+num &lt;- seq(1:26)
+
+x$num = num
+
+# 5
+#y &lt;- data.frame(x)</code></pre>
+</div>
 </div>
 </div>
 <div id="etude-de-données-génomique" class="section level1" number="4">
