@@ -1733,8 +1733,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1]  0.2621969  0.9500949 -1.0007324 -0.9002123 -0.2514610 -1.5491619
-##  [7]  2.0465505 -1.2201593  1.4849577  1.4659857</code></pre>
+<pre><code>##  [1]  0.45748126 -1.25838172  0.26855829 -2.59394971 -0.97311270 -0.59671086
+##  [7] -0.85828415 -1.02227925  0.84107462  0.04453413</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1844,6 +1844,30 @@ ensemble de données basé sur les valeurs du tableau</h2>
 feature pour chaque chromosome (Utiliser la fonction
 <code>table</code>)</p></li>
 </ol>
+<pre class="r"><code># 1
+
+nrow(human.gene.annot[human.gene.annot$`feature type`==&quot;gene&quot;, ])
+
+# ou
+
+nrow(subset(human.gene.annot, `feature type` == &quot;gene&quot;))
+
+# 2
+
+table(human.gene.annot$`feature type`)
+
+# 3
+
+table(human.gene.annot$`chromosome name`)
+
+# 4
+
+table(human.gene.annot$`chromosome name`, human.gene.annot$`feature type`)
+
+# ou
+
+feature.count.table &lt;- table(human.gene.annot[, c(&quot;chromosome name&quot;, &quot;feature type&quot;)])
+feature.count.table</code></pre>
 </div>
 <div id="manipulation-dun-tableau" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Manipulation d’un
