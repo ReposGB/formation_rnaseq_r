@@ -1609,6 +1609,18 @@ correspondre aux lignes du tableau <code>targets</code>.</p>
 </div>
 <div id="solution" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Solution:</h3>
+<pre class="r"><code># Charger les données
+expression_raw_counts &lt;- read.table(&quot;counts_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE, )
+targets &lt;- read.table(&quot;targets_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE)
+
+
+cnames_1 &lt;- gsub(&quot;staraligned.&quot;, &quot;&quot;, colnames(expression_raw_counts))
+cnames_2 &lt;- gsub(&quot;.trim_Aligned.sortedByCoord.out.bam&quot;, &quot;&quot;, cnames_1)
+colnames(expression_raw_counts) &lt;- cnames_2</code></pre>
+<pre class="r"><code># Visualiser les données
+
+View(targets)
+View(expression_raw_counts)</code></pre>
 </div>
 </div>
 <div id="id-conversion-with-biomart" class="section level2" number="2.4">
@@ -1749,6 +1761,13 @@ groupe</li>
 </div>
 <div id="solution-1" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Solution:</h3>
+<pre class="r"><code>keep &lt;- filterByExpr(y, min.total.count=100, min.prop = 0.66, min.count=15) &amp;
+        !is.na(y$genes$entrezgene_id) &amp;
+        (y$genes$hgnc_symbol != &quot;&quot;)
+
+y &lt;- y[keep, , keep.lib.sizes=FALSE]
+
+# Le `keep.lib.sizes=FALSE` force le re-calcul des tailles de librairies.</code></pre>
 </div>
 </div>
 </div>
@@ -1852,6 +1871,7 @@ test exact de Fisher.</h3>
 </div>
 <div id="solution-2" class="section level3" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Solution:</h3>
+<pre class="r"><code>et &lt;- exactTest(y)</code></pre>
 </div>
 </div>
 <div id="extraction-des-gènes-par-toptags" class="section level2" number="5.4">
@@ -1870,14 +1890,22 @@ un fichier <code>top.diff.simple.test.txt</code> au format <strong>texte
 délimité par des tabulations</strong>.</p>
 </div>
 <div id="solution-3" class="section level3" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> Solution</h3>
+<h3><span class="header-section-number">5.4.2</span> Solution:</h3>
+<pre class="r"><code>tt &lt;- topTags(et, adjust.method = &quot;BH&quot;, sort.by = &quot;PValue&quot;, n=1000)
+colnames(tt)</code></pre>
+<pre><code>##  [1] &quot;ensembl_gene_id_version&quot; &quot;entrezgene_id&quot;          
+##  [3] &quot;hgnc_symbol&quot;             &quot;Chr&quot;                    
+##  [5] &quot;Start&quot;                   &quot;End&quot;                    
+##  [7] &quot;Strand&quot;                  &quot;Length&quot;                 
+##  [9] &quot;logFC&quot;                   &quot;logCPM&quot;                 
+## [11] &quot;PValue&quot;                  &quot;FDR&quot;</code></pre>
+<pre class="r"><code>write.table(tt, file = &quot;top.diff.simple.test.txt&quot;, sep = &quot;\t&quot;, 
+            row.names = F, quote = FALSE)</code></pre>
 </div>
 </div>
 <div id="sauver-les-objets-dans-un-fichier" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Sauver les objets
 dans un fichier</h2>
-<div id="td-3" class="section level3" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> TD:</h3>
 <p>Sauver les objets <code>y</code>, <code>et</code>,
 <code>targets</code>, <code>annotated_expression_counts</code> dans le
 fichier <code>diffAnalysis.RData</code>.</p>
@@ -1890,7 +1918,6 @@ fichier <code>diffAnalysis.RData</code>.</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Licence
 Creative Commons:</a> <br>Attribution - Pas d’Utilisation Commerciale -
 Pas de Modification 4.0 International (CC BY-NC-ND 4.0).</p>
-</div>
 </div>
 </div>
 </div>
