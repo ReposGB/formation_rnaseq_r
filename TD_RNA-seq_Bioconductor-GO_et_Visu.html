@@ -1678,9 +1678,9 @@ différentiellement exprimés.</p></li>
 <h3><span class="header-section-number">1.4.2</span> Solution:</h3>
 </div>
 </div>
-<div id="représentation-de-profils-dexpression" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Représentation de
-profils d’expression</h2>
+<div id="représentation-interactive-de-profils-dexpression-par-glimma" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Représentation
+interactive de profils d’expression par Glimma</h2>
 <p>Pour cette partie, nous allons utiliser le package Glimma.</p>
 <p><a href="http://bioconductor.org/packages/release/bioc/html/Glimma.html" class="uri">http://bioconductor.org/packages/release/bioc/html/Glimma.html</a></p>
 <p>Et nous documenter avec sa vignette:</p>
@@ -1688,23 +1688,20 @@ profils d’expression</h2>
 <p>C’est un package très intéressant car il permet d’afficher les plots
 MDS et les profils d’expression de manière interactive et donc
 d’explorer les données très en profondeur.</p>
-<p>On commence par le charger:</p>
-<pre class="r"><code>library(Glimma)</code></pre>
-<div id="plot-mds-avec-glimma" class="section level3" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Plot MDS avec
-GLimma:</h3>
-<pre class="r"><code>glMDSPlot(y, groups =  targets$Treatment)</code></pre>
-<p><a href="glimma-plots/MDS-Plot.html">Click here for interactive
-version</a></p>
+<div id="td-2" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> TD:</h3>
+<ol style="list-style-type: decimal">
+<li><p>Installer/charger le package <strong>Glimma</strong>. Parcourir
+sa documentation.</p></li>
+<li><p>Faire un plot <strong>MDS</strong>. Que peut-on en dire
+?</p></li>
+<li><p>Faire un plot des gènes à l’aide de la fonction
+<code>glMDPlot</code>. Sortez les gènes les plus différentiellement
+exprimés. Commparez au résultat donné par EdgeR.</p></li>
+</ol>
 </div>
-<div id="exploration-des-profils-dexpression-avec-glimma" class="section level3" number="1.5.2">
-<h3><span class="header-section-number">1.5.2</span> Exploration des
-profils d’expression avec Glimma:</h3>
-<pre class="r"><code>dt.edger &lt;- decideTestsDGE(et)
-
-glMDPlot(et, status=dt.edger, counts=y, groups = targets$Treatment, transform = TRUE, display.columns = c(&quot;hgnc_symbol&quot;, &quot;entrezgene_id&quot;))</code></pre>
-<p><a href="glimma-plots/MD-Plot.html">Click here for interactive
-version</a></p>
+<div id="solution-2" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Solution:</h3>
 </div>
 </div>
 </div>
@@ -1745,31 +1742,31 @@ de gènes, à partir de la table <code>tt</code>. La fonction
 <pre class="r"><code>sub_tt &lt;- subset(tt$table, logFC &gt;= logFC.th &amp; FDR &lt; alpha )
 
 gene_names &lt;- sub_tt$entrezgene_id</code></pre>
-<div id="td-2" class="section level3" number="2.1.1">
+<div id="td-3" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> TD:</h3>
 <p>Créer l’objet EnrichGO en spécifiant que nous disposons d’une liste
 sous la forme d’identifiant de type <strong>Entrez Gene ID</strong> et
 que nous souhaitons extraire les <em>Biological Pathways</em>.</p>
 </div>
-<div id="solution-2" class="section level3" number="2.1.2">
+<div id="solution-3" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Solution:</h3>
 </div>
 </div>
-<div id="représentation-graohique" class="section level2" number="2.2">
+<div id="représentation-graphique" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Représentation
-graohique</h2>
-<p>On peut ensuite afficher les <em>Biological Pathways</em> les plus
-différentiellement exprimés à l’aide de <code>barplot</code>.</p>
-<pre class="r"><code>barplot(go_enrich, 
-        drop = TRUE, 
-        showCategory = 10, 
-        title = &quot;GO Biological Pathways&quot;,
-        font.size = 8)</code></pre>
-<p>Ou de DotPlot:</p>
-<pre class="r"><code>dotplot(go_enrich)</code></pre>
-<p>Il est également possible de voir la sortie complète
-d’<code>enrichGO</code> sous forme de table.</p>
-<pre class="r"><code>head(data.frame(go_enrich))</code></pre>
+graphique</h2>
+<div id="td-4" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> TD:</h3>
+<ol style="list-style-type: decimal">
+<li><p>Afficher les <em>Biological Pathways</em> par exemple les 10 les
+plus différentiellement exprimés, à l’aide de
+<code>barplot</code>.</p></li>
+<li><p>Utiliser l’outil <code>dotplot</code>.</p></li>
+<li><p>Sous forme de <em>Data Frame</em>.</p></li>
+</ol>
+</div>
+<div id="solution-4" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Solution:</h3>
 <p><br> <br> <br> <br></p>
 <hr />
 <div style="text-align: center">
@@ -1778,6 +1775,7 @@ d’<code>enrichGO</code> sous forme de table.</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Licence
 Creative Commons:</a> <br>Attribution - Pas d’Utilisation Commerciale -
 Pas de Modification 4.0 International (CC BY-NC-ND 4.0).</p>
+</div>
 </div>
 </div>
 </div>
