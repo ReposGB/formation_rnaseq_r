@@ -1541,6 +1541,13 @@ simples</h2>
 </ol>
 <div id="solution" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Solution</h3>
+<pre class="r"><code># Exercice 1 - Calculs simples
+2+2</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>0.5e4 * 0.3e4</code></pre>
+<pre><code>## [1] 1.5e+07</code></pre>
+<pre class="r"><code>paste(&quot;J&#39;aime&quot;, &quot;Linux&quot;)</code></pre>
+<pre><code>## [1] &quot;J&#39;aime Linux&quot;</code></pre>
 </div>
 </div>
 <div id="exercice-variables-et-environnement" class="section level2" number="3.2">
@@ -1554,6 +1561,12 @@ variables, respectivement <code>a1</code>, <code>a2</code>et
 </ol>
 <div id="solution-1" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Solution</h3>
+<pre class="r"><code># Exercice 2 - variables et environnement
+
+a1 &lt;- 2+2
+a2 &lt;- 0.5e4 * 0.3e4
+str_linux &lt;- paste(&quot;J&#39;aime&quot;, &quot;Linux&quot;)
+# On peut voir les objets dans la fenêtre &quot;environment&quot; sous RStudio</code></pre>
 </div>
 </div>
 <div id="exercice-extraction-déléments-dun-vecteur" class="section level2" number="3.3">
@@ -1576,6 +1589,27 @@ et “EGFR”.</p></li>
 </ol>
 <div id="solution-2" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Solution</h3>
+<pre class="r"><code># Exercice - Extraction d&#39;éléments
+# ----------------------------------
+gl &lt;- c(&quot;ALK&quot;, &quot;HRAS&quot;, &quot;BRAD&quot;, &quot;AKT1&quot;, &quot;EGFR&quot;)
+
+# 1 
+length(gl)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code># 2
+gl[1:3]</code></pre>
+<pre><code>## [1] &quot;ALK&quot;  &quot;HRAS&quot; &quot;BRAD&quot;</code></pre>
+<pre class="r"><code># 3
+gl2 &lt;- c(gl[2], gl[5])
+
+# ou
+gl2 &lt;- gl[c(2,5)]
+
+# 4
+sort(gl)</code></pre>
+<pre><code>## [1] &quot;AKT1&quot; &quot;ALK&quot;  &quot;BRAD&quot; &quot;EGFR&quot; &quot;HRAS&quot;</code></pre>
+<pre class="r"><code># 5 
+gl2 &lt;- c(gl2, &quot;PIK3CA&quot;, &quot;KIT&quot;)</code></pre>
 </div>
 </div>
 <div id="exercice-facteurs" class="section level2" number="3.4">
@@ -1593,6 +1627,27 @@ des opérateurs binaires (==).</p></li>
 </ol>
 <div id="solution-3" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Solution</h3>
+<pre class="r"><code># Exercice: Facteurs
+# ---------------------
+
+cell_type &lt;- factor(c(&quot;C1&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C1&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C1&quot;))
+
+# 1
+
+levels(cell_type)</code></pre>
+<pre><code>## [1] &quot;C1&quot; &quot;C2&quot;</code></pre>
+<pre class="r"><code># 2
+
+length(which(cell_type==&quot;C1&quot;))</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>length(which(cell_type==&quot;C2&quot;))</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code># 3
+
+table(cell_type)</code></pre>
+<pre><code>## cell_type
+## C1 C2 
+##  3  5</code></pre>
 </div>
 </div>
 <div id="exercice-chaines-de-caractères" class="section level2" number="3.5">
@@ -1612,6 +1667,29 @@ champs de <code>chrs</code> séparés par un espace ” “. Indice :
 <code>chrsj</code>. Indice : <code>strsplit</code>. Vérifier s’il est
 identique à <code>chrs</code>.</p></li>
 </ol>
+<pre class="r"><code>### Solution
+
+# Exercice: Chaines de caractères
+# ---------------------------------
+
+# 1
+
+paste(&quot;chr&quot;, 1, sep=&quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;chr1&quot;</code></pre>
+<pre class="r"><code># 2
+
+chrs &lt;- paste(&quot;chr&quot;, c(seq(1, 22), &quot;X&quot;, &quot;Y&quot;), sep=&quot;&quot;)
+
+# 3
+
+chrsj &lt;- paste(chrs, collapse = &#39; &#39;)
+
+# 4
+
+chrs2 &lt;- unlist(strsplit(chrsj, &quot; &quot;))
+
+identical(chrs2, chrs)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="exercice-tableaux-de-données" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Exercice: Tableaux de
@@ -1644,6 +1722,41 @@ Que se passe-t-il ?</p></li>
 </ol>
 <div id="solution-4" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Solution</h3>
+<pre class="r"><code># Exercice: Tableau de données
+# ----------------------------
+
+# 1
+
+a &lt;- rnorm(10, mean = 0, sd = 1)
+
+b &lt;- rep(1, 10)
+
+x &lt;- list(a=a, b=b)
+
+x$a</code></pre>
+<pre><code>##  [1]  0.669378020 -0.007271258 -2.562686465 -0.638516440 -0.047596184
+##  [6]  1.929952393  0.853143686  0.320931639  1.779900990 -1.123938330</code></pre>
+<pre class="r"><code># 2
+
+y &lt;- data.frame(x)
+
+# 3
+
+z1 &lt;- y[1:3,]
+z2 &lt;- y[8:10,]
+
+class(z1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(z2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># 4
+
+num &lt;- seq(1:26)
+
+x$num = num
+
+# 5
+#y &lt;- data.frame(x)</code></pre>
 </div>
 </div>
 </div>
@@ -1680,6 +1793,17 @@ l’objet avec la fonction View, disponible dans RStudio.</p></li>
 </ol>
 <div id="solution-5" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Solution</h3>
+<pre class="r"><code>#1
+human.gene.annot &lt;- read.delim(&quot;gencode.v38.ENSEMBL.annotation.gtf&quot;, comment.char=&quot;#&quot;)
+
+colnames(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
+# 2
+dim(human.gene.annot)
+
+# 3
+head(human.gene.annot)
+tail(human.gene.annot)
+View(human.gene.annot)</code></pre>
 </div>
 </div>
 <div id="sélection-dun-sous-ensemble-de-données" class="section level2" number="4.2">
@@ -1749,7 +1873,6 @@ descriptifs</h2>
 gènes pour le génome total (<code>feature == &quot;gene&quot;</code>)</p>
 <div id="solution-10" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Solution</h3>
-<pre class="r"><code>summary(human.gene.annot.genefeature$length)</code></pre>
 </div>
 </div>
 </div>
