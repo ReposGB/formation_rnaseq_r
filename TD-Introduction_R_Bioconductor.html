@@ -1734,8 +1734,8 @@ b &lt;- rep(1, 10)
 x &lt;- list(a=a, b=b)
 
 x$a</code></pre>
-<pre><code>##  [1]  0.669378020 -0.007271258 -2.562686465 -0.638516440 -0.047596184
-##  [6]  1.929952393  0.853143686  0.320931639  1.779900990 -1.123938330</code></pre>
+<pre><code>##  [1] -1.415290674 -2.649292597 -0.427914296 -1.633788938 -0.669894911
+##  [6]  0.078310322 -1.854898487  0.006159284 -0.008475232 -1.459598958</code></pre>
 <pre class="r"><code># 2
 
 y &lt;- data.frame(x)
@@ -1818,6 +1818,19 @@ chromosomique, strand et le type de <em>feature</em>.</p></li>
 </ol>
 <div id="solution-6" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Solution</h3>
+<pre class="r"><code># 1
+human.gene.annot[12,]
+
+human.gene.annot[12,]$`additional information as key-value pairs`
+
+# 2
+human.gene.annot[100:105, c(&quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;genomic strand&quot;)]
+# ou
+human.gene.annot[100:105, colnames(human.gene.annot) %in% c(&quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;genomic strand&quot;)]
+
+
+# 3
+unique(human.gene.annot[,3])</code></pre>
 </div>
 </div>
 <div id="sélection-dun-sous-ensemble-de-données-basé-sur-les-valeurs-du-tableau" class="section level2" number="4.3">
@@ -1835,6 +1848,30 @@ feature pour chaque chromosome (Utiliser la fonction
 </ol>
 <div id="solution-7" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Solution</h3>
+<pre class="r"><code># 1
+
+nrow(human.gene.annot[human.gene.annot$`feature type`==&quot;gene&quot;, ])
+
+# ou
+
+nrow(subset(human.gene.annot, `feature type` == &quot;gene&quot;))
+
+# 2
+
+table(human.gene.annot$`feature type`)
+
+# 3
+
+table(human.gene.annot$`chromosome name`)
+
+# 4
+
+table(human.gene.annot$`chromosome name`, human.gene.annot$`feature type`)
+
+# ou
+
+feature.count.table &lt;- table(human.gene.annot[, c(&quot;chromosome name&quot;, &quot;feature type&quot;)])
+feature.count.table</code></pre>
 </div>
 </div>
 <div id="manipulation-dun-tableau" class="section level2" number="4.4">
@@ -1845,6 +1882,12 @@ tableau</h2>
 les colonnes <code>start</code>et <code>end</code>.</p>
 <div id="solution-8" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Solution</h3>
+<pre class="r"><code>length = human.gene.annot$`genomic end location` - human.gene.annot$`genomic start location`
+summary(length)
+
+human.gene.annot$length = length
+
+View(human.gene.annot)</code></pre>
 </div>
 </div>
 <div id="plot-de-données" class="section level2" number="4.5">
@@ -1864,6 +1907,16 @@ hist(rnorm(100))
 dev.off()</code></pre>
 <div id="solution-9" class="section level3" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Solution</h3>
+<pre class="r"><code>#1
+
+human.gene.annot.genefeature &lt;- subset(human.gene.annot, `feature type` == &quot;gene&quot;)
+
+hist(log10(human.gene.annot.genefeature$length), breaks = 100)
+
+
+# 2
+
+barplot(table(human.gene.annot.genefeature$`chromosome name`))</code></pre>
 </div>
 </div>
 <div id="paramètres-descriptifs" class="section level2" number="4.6">
@@ -1873,6 +1926,7 @@ descriptifs</h2>
 gènes pour le génome total (<code>feature == &quot;gene&quot;</code>)</p>
 <div id="solution-10" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Solution</h3>
+<pre class="r"><code>summary(human.gene.annot.genefeature$length)</code></pre>
 </div>
 </div>
 </div>
@@ -1883,6 +1937,214 @@ gènes pour le génome total (<code>feature == &quot;gene&quot;</code>)</p>
 <li><p>DataSheet <strong>RStudio:</strong>: <a href="https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/rstudio-ide.pdf</a></p></li>
 <li><p>DataSheet <strong>“tout”</strong>: <a href="https://github.com/rstudio/cheatsheets/tree/main" class="uri">https://github.com/rstudio/cheatsheets/tree/main</a></p></li>
 </ul>
+<pre class="r"><code>################################################################
+#######  Correction TD Partie 3: Manipulation d&#39;objets
+###############################################################@
+
+
+# Exercice 1 - Extraction d&#39;éléments
+# ----------------------------------
+
+gl &lt;- c(&quot;ALK&quot;, &quot;HRAS&quot;, &quot;BRAD&quot;, &quot;AKT1&quot;, &quot;EGFR&quot;)
+
+# 1 
+
+length(gl)
+
+# 2
+gl[1:3]
+
+# 3
+
+gl2 &lt;- c(gl[2], gl[5])
+
+# ou
+
+gl2 &lt;- gl[c(2,5)]
+
+# 4
+
+sort(gl)
+
+# 5 
+
+gl2 &lt;- c(gl2, &quot;PIK3CA&quot;, &quot;KIT&quot;)
+
+
+
+
+
+# Exercice 2: Facteurs
+# ---------------------
+
+cell_type &lt;- factor(c(&quot;C1&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C1&quot;,&quot;C2&quot;,&quot;C2&quot;,&quot;C1&quot;))
+
+# 1
+
+levels(cell_type)
+
+# 2
+
+length(which(cell_type==&quot;C1&quot;))
+
+length(which(cell_type==&quot;C2&quot;))
+
+# 3
+
+table(cell_type)
+
+# Exercice 3: Chaines de caractères
+# ---------------------------------
+
+# 1
+
+paste(&quot;chr&quot;, 1, sep=&quot;&quot;)
+
+# 2
+
+chrs &lt;- paste(&quot;chr&quot;, c(seq(1, 22), &quot;X&quot;, &quot;Y&quot;), sep=&quot;&quot;)
+
+# 3
+
+chrsj &lt;- paste(chrs, collapse = &#39; &#39;)
+
+# 4
+
+chrs2 &lt;- unlist(strsplit(chrsj, &quot; &quot;))
+
+identical(chrs2, chrs)
+
+
+# Exercice 4: Tableau de données
+# ----------------------------
+
+# 1
+
+a &lt;- rnorm(10, mean = 0, sd = 1)
+
+b &lt;- rep(1, 10)
+
+x &lt;- list(a=a, b=b)
+
+x$a
+
+# 2
+
+y &lt;- data.frame(x)
+
+# 3
+
+z1 &lt;- y[1:3,]
+z2 &lt;- y[8:10,]
+
+class(z1)
+class(z2)
+
+# 4
+
+num &lt;- seq(1:26)
+
+x$num = num
+
+# 5
+y &lt;- data.frame(x)
+# Impossible: nombre de lignes différents</code></pre>
+<pre class="bash"><code>##########################################################@##############
+# Correction TD Partie 4 : Etude de données génomiques
+#########################################################################
+
+# Exercice 1: Chargement des données 
+# 1 
+# Dans bash:
+
+gunzip gencode.v38.ENSEMBL.annotation.gtf.gz
+</code></pre>
+<pre class="r"><code># Dans R:
+human.gene.annot &lt;- read.delim(&quot;gencode.v38.ENSEMBL.annotation.gtf&quot;, comment.char=&quot;#&quot;)
+
+names(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
+# 2
+dim(human.gene.annot)
+
+# 3
+head(human.gene.annot)
+tail(human.gene.annot)
+View(human.gene.annot)
+
+# Exercice 2: Sélection d&#39;un sous-ensemble de données
+
+# 1
+human.gene.annot[12,]
+
+# 2
+human.gene.annot[100:105,]
+
+# 3
+unique(human.gene.annot[,3])
+
+
+# Exercice 3: selection d&#39;un sous ensemble basé sur les valeurs du tableau
+
+# 1
+
+nrow(human.gene.annot[human.gene.annot$`feature type`==&quot;gene&quot;, ])
+
+# ou
+
+nrow(subset(human.gene.annot, `feature type` == &quot;gene&quot;))
+
+# 2
+
+table(human.gene.annot$`feature type`)
+
+# 3
+
+table(human.gene.annot$`chromosome name`)
+
+# 4
+
+table(human.gene.annot$`chromosome name`, human.gene.annot$`feature type`)
+
+# ou
+
+feature.count.table &lt;- table(human.gene.annot[, c(&quot;chromosome name&quot;, &quot;feature type&quot;)])
+feature.count.table
+
+# conversion table vers dataframe
+
+feature.count.matrix &lt;- (apply(as.matrix(feature.count.table), 2 , as.numeric))
+rownames(feature.count.matrix) &lt;- rownames(feature.count.table)
+
+
+# Exercice 4: Manipulation d&#39;un tableau
+
+# 1
+
+length = human.gene.annot$`genomic end location` - human.gene.annot$`genomic start location`
+summary(length)
+
+human.gene.annot$length = length
+
+View(human.gene.annot)
+
+# Exercice: Plot
+
+#1
+
+human.gene.annot.genefeature &lt;- subset(human.gene.annot, `feature type` == &quot;gene&quot;)
+
+hist(log10(human.gene.annot.genefeature$length), breaks = 100)
+
+
+# 2
+
+barplot(table(human.gene.annot.genefeature$`chromosome name`))
+
+# Exercice: Paramètres descriptifs
+
+# 1 
+
+summary(human.gene.annot.genefeature$length)</code></pre>
 <p><br> <br> <br> <br></p>
 <hr />
 <div style="text-align: center">
