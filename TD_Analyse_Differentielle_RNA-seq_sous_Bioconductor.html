@@ -1632,6 +1632,18 @@ correspondre aux lignes du tableau <code>targets</code>.</p>
 </div>
 <div id="solution" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Solution:</h3>
+<pre class="r"><code># Charger les données
+expression_raw_counts &lt;- read.table(&quot;counts_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE, )
+targets &lt;- read.table(&quot;targets_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE)
+
+
+cnames_1 &lt;- gsub(&quot;staraligned.&quot;, &quot;&quot;, colnames(expression_raw_counts))
+cnames_2 &lt;- gsub(&quot;.trim_Aligned.sortedByCoord.out.bam&quot;, &quot;&quot;, cnames_1)
+colnames(expression_raw_counts) &lt;- cnames_2</code></pre>
+<pre class="r"><code># Visualiser les données
+
+View(targets)
+View(expression_raw_counts)</code></pre>
 </div>
 </div>
 <div id="id-conversion-with-biomart" class="section level2" number="3.4">
@@ -1782,6 +1794,17 @@ groupe</li>
 </div>
 <div id="solution-1" class="section level3" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Solution:</h3>
+<pre class="r"><code>keep &lt;- filterByExpr(y, min.total.count=100, min.prop = 0.66, min.count=15) &amp;
+        !is.na(y$genes$entrezgene_id) &amp;
+        (y$genes$hgnc_symbol != &quot;&quot;) &amp; (y$genes$Chr!=&quot;chrM&quot;)
+
+table(keep)</code></pre>
+<pre><code>## keep
+## FALSE  TRUE 
+## 36312  1712</code></pre>
+<pre class="r"><code>y &lt;- y[keep, , keep.lib.sizes=FALSE]
+
+# Le `keep.lib.sizes=FALSE` force le re-calcul des tailles de librairies.</code></pre>
 </div>
 </div>
 </div>
@@ -1830,12 +1853,12 @@ compte de ces biais</strong>.</p>
 <pre class="r"><code>y &lt;- calcNormFactors(y, method = &quot;TMM&quot;)
 y$samples</code></pre>
 <pre><code>##            group lib.size norm.factors
-## SRR9005674  THP0  2758493    0.7687104
-## SRR9005675  THP0  2609367    0.7660340
-## SRR9005676  THP0  2690299    0.7857053
-## SRR9005677     M  1659773    1.2962417
-## SRR9005678     M  1624891    1.2882037
-## SRR9005679     M  1504970    1.2943717</code></pre>
+## SRR9005674  THP0  1610494    0.9868278
+## SRR9005675  THP0  1543525    0.9735501
+## SRR9005676  THP0  1632568    0.9838545
+## SRR9005677     M  1612850    1.0218033
+## SRR9005678     M  1570926    1.0211553
+## SRR9005679     M  1455112    1.0139355</code></pre>
 </div>
 <div id="plot-mds-multidimensional-scaling" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Plot MDS
@@ -1884,6 +1907,7 @@ test exact de Fisher.</h3>
 </div>
 <div id="solution-2" class="section level3" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Solution:</h3>
+<pre class="r"><code>et &lt;- exactTest(y)</code></pre>
 </div>
 </div>
 <div id="extraction-des-gènes-par-toptags" class="section level2" number="6.4">
@@ -1903,6 +1927,16 @@ délimité par des tabulations</strong>.</p>
 </div>
 <div id="solution-3" class="section level3" number="6.4.2">
 <h3><span class="header-section-number">6.4.2</span> Solution:</h3>
+<pre class="r"><code>tt &lt;- topTags(et, adjust.method = &quot;BH&quot;, sort.by = &quot;PValue&quot;, n=1000)
+colnames(tt)</code></pre>
+<pre><code>##  [1] &quot;ensembl_gene_id_version&quot; &quot;entrezgene_id&quot;          
+##  [3] &quot;hgnc_symbol&quot;             &quot;Chr&quot;                    
+##  [5] &quot;Start&quot;                   &quot;End&quot;                    
+##  [7] &quot;Strand&quot;                  &quot;Length&quot;                 
+##  [9] &quot;logFC&quot;                   &quot;logCPM&quot;                 
+## [11] &quot;PValue&quot;                  &quot;FDR&quot;</code></pre>
+<pre class="r"><code>write.table(tt, file = &quot;top.diff.simple.test.txt&quot;, sep = &quot;\t&quot;, 
+            row.names = F, quote = FALSE)</code></pre>
 </div>
 </div>
 <div id="sauver-les-objets-dans-un-fichier" class="section level2" number="6.5">
